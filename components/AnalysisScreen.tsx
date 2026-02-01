@@ -37,7 +37,7 @@ const AnalysisScreen: React.FC = () => {
         const timeout2 = setTimeout(() => {
             setPhase(2);
             setDetections([
-                { id: 999, x: 35, y: 45, label: 'Bullous Emphysema' }, // Left arrow (detected feature)
+                { id: 999, x: 35, y: 55, label: 'Bullous Emphysema' }, // Moved Y from 45 to 55
                 // Approx location based on image provided
             ]);
         }, 5500);
@@ -104,7 +104,7 @@ const AnalysisScreen: React.FC = () => {
                 {/* Specific "Arrow" Highlight Animation (Phase 2) */}
                 {phase >= 2 && (
                     <>
-                        <div className="absolute top-[32%] left-[33%] w-24 h-24 border-2 border-orange-500 rounded-full animate-pulse shadow-[0_0_30px_rgba(249,115,22,0.4)] flex items-center justify-center">
+                        <div className="absolute top-[50%] left-[33%] w-24 h-24 border-2 border-orange-500 rounded-full animate-pulse shadow-[0_0_30px_rgba(249,115,22,0.4)] flex items-center justify-center">
                             <div className="absolute -right-4 -bottom-4">
                                 <CornerUpLeft className="text-orange-400 rotate-90" size={32} />
                             </div>

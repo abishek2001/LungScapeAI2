@@ -23,7 +23,7 @@ const STRUCTURE_POINTS: Record<string, THREE.Vector3> = {
     fibrosisMap: new THREE.Vector3(3.0, -3.5, 1.0),
     airflow: new THREE.Vector3(0, 1.5, 0.0), // Central flow area
     lobes: new THREE.Vector3(-3.0, 1.5, 1.0),
-    pathology: new THREE.Vector3(-2.8, 3.5, 0.8), // Moved to visual LEFT
+    pathology: new THREE.Vector3(-2.8, 1.2, 0.8), // Moved from 3.5 to 1.2 (Middle)
 };
 
 // --- SHADERS ---
