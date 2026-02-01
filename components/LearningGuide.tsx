@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { BookOpen, ChevronRight, Wind, Layers, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { BookOpen, ChevronRight, Wind, Layers, AlertCircle, CheckCircle2, X } from 'lucide-react';
 import { VisualizationLayers } from '../types';
 
 interface LearningGuideProps {
@@ -70,8 +70,8 @@ const LearningGuide: React.FC<LearningGuideProps> = ({ onLayerUpdate, onExit }) 
     };
 
     return (
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full max-w-2xl z-40">
-            <div className="bg-slate-900/90 backdrop-blur-xl border border-cyan-500/30 rounded-2xl p-6 shadow-2xl relative overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-500">
+        <div className="absolute bottom-6 left-6 w-80 z-40">
+            <div className="bg-slate-900/95 backdrop-blur-xl border border-cyan-500/30 rounded-xl p-4 shadow-2xl relative overflow-hidden animate-in slide-in-from-left-10 fade-in duration-500">
 
                 {/* Progress Bar */}
                 <div className="absolute top-0 left-0 w-full h-1 bg-slate-800">
@@ -81,48 +81,38 @@ const LearningGuide: React.FC<LearningGuideProps> = ({ onLayerUpdate, onExit }) 
                     />
                 </div>
 
-                <div className="flex items-start gap-6">
-                    {/* Icon/Avatar Area */}
-                    <div className="hidden sm:flex flex-col items-center gap-2 mt-1">
-                        <div className="w-12 h-12 rounded-full bg-cyan-500/20 border border-cyan-500 flex items-center justify-center text-cyan-400">
-                            <BookOpen size={24} />
+                <div className="flex flex-col gap-3">
+                    <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+                                <BookOpen size={16} />
+                            </div>
+                            <h3 className="text-sm font-bold text-white tracking-tight">
+                                {step.title}
+                            </h3>
                         </div>
-                        <div className="w-[1px] h-full bg-slate-700 my-2"></div>
+                        <button
+                            onClick={onExit}
+                            className="text-slate-500 hover:text-white transition-colors p-1"
+                        >
+                            <X size={14} />
+                        </button>
                     </div>
 
-                    <div className="flex-1">
-                        <div className="flex justify-between items-start mb-2">
-                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                                {step.title}
-                                <span className="text-xs font-normal text-slate-500 border border-slate-700 px-2 py-0.5 rounded-full">
-                                    Step {currentStepIndex + 1}/{STEPS.length}
-                                </span>
-                            </h3>
-                            <button
-                                onClick={onExit}
-                                className="text-slate-400 hover:text-white text-sm"
-                            >
-                                Exit Guide
-                            </button>
-                        </div>
+                    <p className="text-slate-300 leading-snug text-xs">
+                        {step.description}
+                    </p>
 
-                        <p className="text-slate-300 leading-relaxed mb-6 text-lg">
-                            {step.description}
-                        </p>
-
-                        <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 flex items-center justify-between gap-4 group cursor-pointer hover:bg-cyan-900/10 hover:border-cyan-500/30 transition-all" onClick={handleNext}>
-                            <div className="flex-1">
-                                <div className="text-xs text-cyan-400 font-bold uppercase tracking-wider mb-1">Suggested Next Step</div>
-                                <div className="text-slate-200 font-medium group-hover:text-white">
-                                    {step.prompt}
-                                </div>
-                            </div>
-                            <button
-                                className="bg-cyan-500 hover:bg-cyan-400 text-black px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition-transform group-hover:scale-105 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
-                            >
-                                {step.actionLabel} <ChevronRight size={18} />
-                            </button>
+                    <div className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50 hover:bg-cyan-900/10 hover:border-cyan-500/30 transition-all group cursor-pointer" onClick={handleNext}>
+                        <div className="text-[10px] text-cyan-400 font-bold uppercase tracking-widest mb-1">Next Instruction</div>
+                        <div className="text-slate-200 text-xs font-medium mb-3 group-hover:text-white line-clamp-2">
+                            {step.prompt}
                         </div>
+                        <button
+                            className="w-full bg-cyan-500 hover:bg-cyan-400 text-black py-2 rounded-md font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                        >
+                            {step.actionLabel} <ChevronRight size={14} />
+                        </button>
                     </div>
                 </div>
             </div>

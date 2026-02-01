@@ -8,11 +8,12 @@ import LandingPage from './components/LandingPage';
 import GeminiAnalysisDisplay from './components/GeminiAnalysisDisplay';
 import AnalysisScreen from './components/AnalysisScreen';
 import LearningGuide from './components/LearningGuide';
+import AIChatHub from './components/AIChatHub';
 import { analyzeLungProgression } from './services/geminiService';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import {
   Upload, FileText, Activity, Maximize, Minimize,
-  Layers, Wind, Boxes, ScanFace, HeartPulse, CheckCircle, AlertTriangle, Box
+  Layers, Wind, Boxes, ScanFace, HeartPulse, CheckCircle, AlertTriangle, Box, MessageSquare
 } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -21,6 +22,7 @@ const App: React.FC = () => {
   const [appState, setAppState] = useState<'upload' | 'analyzing' | 'results'>('upload');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLearningMode, setIsLearningMode] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [aiAnalysis, setAiAnalysis] = useState<string>('');
 
   // 3D Controls Refs (One for each visualizer instance to avoid conflicts)
@@ -261,6 +263,21 @@ const App: React.FC = () => {
         onEnableChange={() => { }}
         targetControlsRef={isFullscreen ? fullScreenControlsRef : normalControlsRef}
       />
+
+      {/* AI CHAT HUB TOGGLE */}
+      {!isFullscreen && appState === 'results' && !isChatOpen && (
+        <button
+          onClick={() => setIsChatOpen(true)}
+          className="fixed bottom-8 right-8 w-14 h-14 bg-cyan-600 hover:bg-cyan-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all group z-[60]"
+        >
+          <MessageSquare size={24} />
+          <div className="absolute right-full mr-4 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg border border-slate-700 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            Ask LungScape AI
+          </div>
+        </button>
+      )}
+
+      <AIChatHub isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
 
     </div>
   );
