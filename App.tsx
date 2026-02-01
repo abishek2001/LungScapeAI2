@@ -5,6 +5,7 @@ import { VisualizationLayers, ViewMode } from './types';
 import LungVisualizer from './components/LungVisualizer';
 import HandGestureController from './components/HandGestureController';
 import LandingPage from './components/LandingPage';
+import GeminiAnalysisDisplay from './components/GeminiAnalysisDisplay';
 import { analyzeLungProgression } from './services/geminiService';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import {
@@ -48,7 +49,7 @@ const App: React.FC = () => {
 
       setAiAnalysis(hardcodedAnalysis);
       setAppState('results');
-    }, 2500);
+    }, 8000);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,18 +161,14 @@ const App: React.FC = () => {
 
           <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-2xl backdrop-blur-sm relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500"></div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-slate-800 rounded-lg text-cyan-400">
-                <FileText size={20} />
-              </div>
-              <h3 className="text-lg font-semibold text-slate-200">Gemini Findings</h3>
+
+            {/* New Graphic Display */}
+            <div className="h-[420px] relative z-10">
+              <GeminiAnalysisDisplay analysis={aiAnalysis} />
             </div>
-            <div className="prose prose-invert prose-sm max-w-none text-slate-300 leading-relaxed h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-              {/* Just showing the raw text elegantly */}
-              {aiAnalysis.split('\n').map((line, i) => (
-                <p key={i} className="mb-2">{line}</p>
-              ))}
-            </div>
+
+            {/* Background shimmer effect for premium feel */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
           </div>
         </div>
 
