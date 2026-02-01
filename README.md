@@ -1,20 +1,26 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+**LungScapeAI**
 
-# Run and deploy your AI Studio app
+Interactive AI-powered 3D visualization of lung anatomy and function from medical imaging
 
-This contains everything you need to run your app locally.
+**📌 Overview**
 
-View your app in AI Studio: https://ai.studio/apps/drive/1cdih4J5bhioCo14m3v75BD3bZwNJJNO0
+LungScapeAI is an AI-powered web application that transforms 2D lung CT/MRI scans into interactive 3D lung models with anatomical layering and functional insights.
 
-## Run Locally
+The project bridges the gap between raw medical imaging and human understanding by combining medical image segmentation, geometry-based 3D reconstruction, and a learning-first visualization interface. LungScapeAI is designed for clinicians, patients, and researchers to explore lung anatomy, understand disease impact, and visualize functional metrics spatially.
 
-**Prerequisites:**  Node.js
+**🧠 How It Works**
+2D Lung Scan (CT / MRI)
+        ↓
+Preprocessing & Normalization
+        ↓
+AI Segmentation (U-Net based)
+        ↓
+3D Volume Reconstruction
+        ↓
+Mesh Generation & Optimization
+        ↓
+Functional Metrics Computation
+        ↓
+Interactive 3D Visualization + Explanations
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+**All 3D geometry and metrics are computed deterministically for safety and explainability.**
