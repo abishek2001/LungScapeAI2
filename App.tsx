@@ -7,11 +7,12 @@ import HandGestureController from './components/HandGestureController';
 import LandingPage from './components/LandingPage';
 import GeminiAnalysisDisplay from './components/GeminiAnalysisDisplay';
 import AnalysisScreen from './components/AnalysisScreen';
+import LearningGuide from './components/LearningGuide';
 import { analyzeLungProgression } from './services/geminiService';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import {
   Upload, FileText, Activity, Maximize, Minimize,
-  Layers, Wind, Boxes, ScanFace, HeartPulse, CheckCircle, AlertTriangle
+  Layers, Wind, Boxes, ScanFace, HeartPulse, CheckCircle, AlertTriangle, Box
 } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -19,6 +20,7 @@ const App: React.FC = () => {
   const [showLanding, setShowLanding] = useState(true);
   const [appState, setAppState] = useState<'upload' | 'analyzing' | 'results'>('upload');
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isLearningMode, setIsLearningMode] = useState(false);
   const [aiAnalysis, setAiAnalysis] = useState<string>('');
 
   // 3D Controls Refs (One for each visualizer instance to avoid conflicts)
@@ -226,13 +228,30 @@ const App: React.FC = () => {
         </div>
 
         {/* RIGHT SIDE TOGGLES (As requested) */}
-        <div className="absolute top-6 right-6 w-64 bg-slate-900/80 backdrop-blur-xl border border-slate-700 rounded-2xl p-5 shadow-2xl animate-in slide-in-from-right-20 duration-700 delay-300">
-          <div className="flex items-center gap-2 mb-4 text-slate-400 pb-2 border-b border-slate-700/50">
-            <Layers size={18} />
-            <span className="text-xs font-bold uppercase tracking-widest">Active Layers</span>
+        {!isLearningMode && (
+          <div className="absolute top-6 right-6 w-64 bg-slate-900/80 backdrop-blur-xl border border-slate-700 rounded-2xl p-5 shadow-2xl animate-in slide-in-from-right-20 duration-700 delay-300">
+            <div className="flex items-center gap-2 mb-4 text-slate-400 pb-2 border-b border-slate-700/50">
+              <Layers size={18} />
+              <span className="text-xs font-bold uppercase tracking-widest">Active Layers</span>
+            </div>
+            <LayerToggles />
+
+            <button
+              onClick={() => setIsLearningMode(true)}
+              className="w-full mt-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 rounded-xl shadow-lg transition-transform hover:scale-105 flex items-center justify-center gap-2"
+            >
+              <Box size={18} /> Start Learning Mode
+            </button>
           </div>
-          <LayerToggles />
-        </div>
+        )}
+
+        {/* LEARNING GUIDE OVERLAY */}
+        {isLearningMode && (
+          <LearningGuide
+            onLayerUpdate={setLayers}
+            onExit={() => setIsLearningMode(false)}
+          />
+        )}
 
       </div>
 

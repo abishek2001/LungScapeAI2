@@ -21,6 +21,7 @@ export interface VisualizationLayers {
   airflow: boolean;       // Particle flow animation
   fibrosisMap: boolean;   // Heatmap overlay
   motion: boolean;        // Breathing expansion
+  pathology?: boolean;     // Detected features (e.g. arrows/highlights)
 }
 
 export interface LungMetrics {
