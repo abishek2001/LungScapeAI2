@@ -1,0 +1,7 @@
+{
+  "name": "LungScape",
+  "description": "An AI-assisted longitudinal lung imaging analysis platform. It visualizes structural and functional changes over time, offering distinct views for clinicians and patients.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
